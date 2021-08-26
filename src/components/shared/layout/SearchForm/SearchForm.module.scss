@@ -1,101 +1,93 @@
 #searchForm {
-    display: flex;
     flex: 1;
+    display: flex;
 
-    form {
-        flex: 1;
+    > .searchField {
+        flex: 1 0 0;
         display: flex;
-    
-        > .searchField {
+
+        > input {
+            background: transparent;
+            font-size: 1.6rem;
+            border: 1px solid transparent;
             flex: 1 0 0;
-            display: flex;
+            outline: none;
+            color: #FFF;
+            font-weight: bold;
     
-            > input {
-                background: transparent;
-                font-size: 1.6rem;
-                border: 1px solid transparent;
-                flex: 1 0 0;
-                outline: none;
+            &::placeholder {
                 color: #FFF;
-                font-weight: bold;
-        
-                &::placeholder {
-                    color: #FFF;
-                }
-
-                &::-ms-clear {
-                    display: none;
-                }
             }
 
-            > .tabletMagnifyingGlass {
+            &::-ms-clear {
                 display: none;
-                position: absolute;
-                top: 10px;
-                left: 12px;
-                width: 24px;
-                height: 24px;
-            }
-
-            > .tablet-clear-button {
-                display: none;
-                position: absolute;
-                right: 0;
-                margin-top: 8px;
-                margin-right: 10px;
-                background: transparent;
-                cursor: pointer;
-                border: 0;
-                outline: none;
             }
         }
 
-        > .mobile-clear-button {
-            cursor: pointer;
-            padding: 12px;
-            width: 48px;
-            height: 48px;
+        > .tabletMagnifyingGlass {
+            display: none;
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            width: 24px;
+            height: 24px;
+        }
+
+        > .tabletClearButton {
+            display: none;
+            position: absolute;
+            right: 0;
+            margin-top: 8px;
+            margin-right: 10px;
             background: transparent;
-            border: none;
+            cursor: pointer;
+            border: 0;
             outline: none;
         }
+    }
+
+    > .mobileClearButton {
+        cursor: pointer;
+        padding: 12px;
+        width: 48px;
+        height: 48px;
+        background: transparent;
+        border: none;
+        outline: none;
     }
 }
 
 @media (min-width: 768px) and (orientation: portrait), (min-width: 824px) and (orientation: landscape) {
     #searchForm {
-        form {
-            > .mobile-clear-button {
-                display: none;
-            }
-
-            > .searchField {
-                position: relative;
-                flex: 0 0 360px;
-                
-                > input {
-                    color: #000;
-                    font-size: 1.4rem;
-                    height: 40px;
-                    padding: 6px 48px;
-                    font-weight: normal;
-                    // background: url('/assets/images/icons/tablet/magnify.svg') 15px 8px no-repeat #FFF;
-                    background: #FFF;
-                    border-radius: 500px;
-
-                    &::placeholder {
-                        color: #898989; 
-                    }
-                }
-
-                > .tabletMagnifyingGlass {
-                    display: block;
-                }
-
-                > .tablet-clear-button.active {
-                    display: block;
+        > .searchField {
+            position: relative;
+            flex: 0 0 360px;
+            
+            > input {
+                color: #000;
+                font-size: 1.4rem;
+                height: 40px;
+                padding: 6px 48px;
+                font-weight: normal;
+                background: #FFF;
+                border-radius: 500px;
+    
+                &::placeholder {
+                    color: #898989; 
                 }
             }
+    
+            > .tabletMagnifyingGlass {
+                display: block;
+            }
+    
+            > .tabletClearButton.active {
+                display: block;
+            }
+        }
+
+        > .mobileClearButton {
+            display: none;
         }
     }
 }

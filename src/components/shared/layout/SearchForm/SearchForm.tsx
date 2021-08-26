@@ -1,8 +1,6 @@
 import style from './SearchForm.module.scss';
 
-const SearchForm = () => {
-    console.log(style);
-
+const SearchForm = (props: any) => {
     return (
         <form id={style.searchForm}> {/* [formGroup]="formGroup" */}
             <div className={style.searchField}>
@@ -12,20 +10,20 @@ const SearchForm = () => {
                     </svg>
                 </div>
                 <input type="text" placeholder="Search" /> { /* formControlName="searchTerm" */}
-                <button className="tablet-clear-button"> {/*  (click)="searchCleared.emit()" [class.active]="showClearButton" */}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M4.93,4.93,19.07,19.07m-14.14,0L19.07,4.93" fill="none" strokeMiterlimit="10"></path> { /*  [ngClass]="isWhite ? 'whiteStroke' : 'blackStroke'" */}
-                    <polygon points="6 8.13 6.84 7.28 7.55 8 6.78 8.74 6 8.13"></polygon>
+                <button className={style.tabletClearButton}> {/*  (click)="searchCleared.emit()" [class.active]="showClearButton" */}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="blackStroke">
+                        <path d="M4.93,4.93,19.07,19.07m-14.14,0L19.07,4.93" fill="none" strokeMiterlimit="10"></path> { /*  [ngClass]="isWhite ? 'whiteStroke' : 'blackStroke'" */}
+                        <polygon points="6 8.13 6.84 7.28 7.55 8 6.78 8.74 6 8.13"></polygon>
                     </svg>
                 </button>
             </div>
-            <button className="mobile-clear-button"> {/* (click)="searchCleared.emit()" */}
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M4.93,4.93,19.07,19.07m-14.14,0L19.07,4.93" fill="none" strokeMiterlimit="10"></path> { /*  [ngClass]="isWhite ? 'whiteStroke' : 'blackStroke'" */}
-                <polygon points="6 8.13 6.84 7.28 7.55 8 6.78 8.74 6 8.13"></polygon>
+            <button className={style.mobileClearButton}> {/* (click)="searchCleared.emit()" */}
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="whiteStroke">
+                    <path d="M4.93,4.93,19.07,19.07m-14.14,0L19.07,4.93" fill="none" strokeMiterlimit="10"></path> { /*  [ngClass]="isWhite ? 'whiteStroke' : 'blackStroke'" */}
+                    <polygon points="6 8.13 6.84 7.28 7.55 8 6.78 8.74 6 8.13"></polygon>
                 </svg>
             </button>
-            </form>
+        </form>
     );
 };
 
