@@ -25,22 +25,6 @@ body {
   display: none;
 }
 
-.arrow-icon {
-  fill: #FFF;
-}
-
-.arrow-icon.disabled {
-  fill: rgba(170, 170, 170, 0.6);
-}
-
-.whiteStroke {
-  stroke: #FFF;
-}
-
-.blackStroke {
-  stroke: #000;
-}
-
 #root {
   flex: 1 0 0;
   display: flex;

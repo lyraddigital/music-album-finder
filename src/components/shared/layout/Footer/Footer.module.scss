@@ -8,7 +8,7 @@ footer {
         display: flex;
         justify-content: center;
     
-        > div {
+        > .itemContent {
             display: flex;
             color: #b3b3b3;
             justify-content: center;
@@ -29,12 +29,6 @@ footer {
                 line-height: 1.6rem;
             }
         }
-    }
-
-    .navigationItem {
-        width: 24px;
-        height: 24px;
-        fill: #b3b3b3;
     }
 }
 
