@@ -21,7 +21,7 @@ function App() {
         <TopBar />
         <Router>
           <Switch>
-            <Route path="/search/results" component={SearchResults} />
+            <Route path="/search/results/:searchTerm" component={SearchResults} />
             <Route path="/" component={SearchStart} />
           </Switch>
         </Router>
