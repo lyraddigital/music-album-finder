@@ -10,6 +10,8 @@ import SideBar from './components/shared/layout/SideBar/SideBar';
 import TopBar from './components/shared/layout/TopBar/TopBar';
 import Footer from './components/shared/layout/Footer/Footer';
 import SearchStart from './pages/SearchStart/SearchStart';
+import withSearch from './components/hoc/withSearch';
+import SearchResults from './pages/SearchResults/SearchResults';
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
         <TopBar />
         <Router>
           <Switch>
+            <Route path="/search/results" component={SearchResults} />
             <Route path="/" component={SearchStart} />
           </Switch>
         </Router>
@@ -28,4 +31,4 @@ function App() {
   );
 }
 
-export default App;
+export default withSearch(App);
