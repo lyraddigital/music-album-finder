@@ -20,17 +20,17 @@ const SearchForm = (props: RouteComponentProps) => {
 
         setSearchTerm(newSearchTerm);
         
-        if (isSearchResultsPage) {
+        if (isSearchResultsPage && newSearchTerm) {
             history.replace(`${newSearchTerm}`);
         } else {
-            history.push(`${SEARCH_RESULTS_PAGE_URL}${newSearchTerm}`);
+            history.push(`${SEARCH_RESULTS_PAGE_URL}${newSearchTerm}`, { key: history.location.key });
         }
     };
 
     const clearSearchTerm = () => {
         setSearchTerm('');
 
-        history.push(SEARCH_START_PAGE_URL);
+        history.push(SEARCH_START_PAGE_URL, { key: history.location.key });
     };
 
     return (
