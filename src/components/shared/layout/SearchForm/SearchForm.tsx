@@ -1,19 +1,36 @@
-import useSearch from '../../../../hooks/useSearch';
+import { ChangeEvent, useState } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+
 import MagnifyingIcon from '../../icons/MagnifyingIcon/MagnifyingIcon';
 import XIcon from '../../icons/XIcon/XIcon';
 import style from './SearchForm.module.scss';
 
-const SearchForm = () => {
-    const search = useSearch();
-    const searchTerm = search.searchTerm;
+const SEARCH_RESULTS_PAGE_URL = '/search/results/';
+const SEARCH_START_PAGE_URL = '/search/start/';
+
+const SearchForm = (props: RouteComponentProps) => {
+    const { history, location } = props;
+    const isSearchResultsPage = location?.pathname?.startsWith(SEARCH_RESULTS_PAGE_URL);
+    const searchUrl =  isSearchResultsPage ? location?.pathname.replace(SEARCH_RESULTS_PAGE_URL, ''): '';
+    const [searchTerm, setSearchTerm] = useState<string>(searchUrl);
     const clearButtonClass = `${style.tabletClearButton} ${searchTerm.length > 0 ? style.active: undefined}`;
 
-    const performSearch = (e: any) => {
-        search.performSearch(e.target.value)
+    const performSearch = (e: ChangeEvent<HTMLInputElement>) => {
+        const newSearchTerm = e.target?.value;
+
+        setSearchTerm(newSearchTerm);
+        
+        if (isSearchResultsPage) {
+            history.replace(`${newSearchTerm}`);
+        } else {
+            history.push(`${SEARCH_RESULTS_PAGE_URL}${newSearchTerm}`); 
+        }
     };
 
     const clearSearchTerm = () => {
-        search.clearSearchTerm();
+        setSearchTerm('');
+
+        history.push(SEARCH_START_PAGE_URL);
     };
 
     return (
@@ -34,4 +51,4 @@ const SearchForm = () => {
     );
 };
 
-export default SearchForm;
+export default withRouter(SearchForm);

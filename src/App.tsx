@@ -1,7 +1,8 @@
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 
 import './App.scss';
@@ -10,25 +11,25 @@ import SideBar from './components/shared/layout/SideBar/SideBar';
 import TopBar from './components/shared/layout/TopBar/TopBar';
 import Footer from './components/shared/layout/Footer/Footer';
 import SearchStart from './pages/SearchStart/SearchStart';
-import withSearch from './components/hoc/withSearch';
 import SearchResults from './pages/SearchResults/SearchResults';
 
 function App() {
   return (
-    <>
+    <Router>
       <SideBar />
       <main>
-        <TopBar />
-        <Router>
+          <TopBar />
           <Switch>
             <Route path="/search/results/:searchTerm" component={SearchResults} />
-            <Route path="/" component={SearchStart} />
+            <Route path="/search/start" component={SearchStart} />
+            <Route path="/">
+              <Redirect to="/search/start" />
+            </Route>
           </Switch>
-        </Router>
-        <Footer />
+          <Footer />        
       </main>
-    </>
+    </Router>
   );
 }
 
-export default withSearch(App);
+export default App;
