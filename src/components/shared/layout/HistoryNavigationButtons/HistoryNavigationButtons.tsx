@@ -1,19 +1,31 @@
+import { withRouter } from 'react-router-dom';
+
 import style from './HistoryNavigationButtons.module.scss';
 
 import BackArrowIcon from '../../icons/BackArrowIcon/BackArrowIcon';
 import ForwardArrowIcon from '../../icons/ForwardArrowIcon/ForwardArrowIcon';
 
 const HistoryNavigationButtons = (props: any) => {
+    const { history } = props;
+
+    const navigateBack = () => {        
+        history.goBack();
+    };
+
+    const navigateForward = () => {
+        history.goForward();
+    };
+
     return (
         <div id={style.historyNavigationButtons}>
-            <button disabled={props.backButtonDisabled}> {/* (click)="navigateBack()" */}
-                <BackArrowIcon disabled={props.backButtonDisabled} />
+            <button onClick={navigateBack}> {/* disabled={props.backButtonDisabled} */}
+                <BackArrowIcon /> {/* disabled={props.backButtonDisabled} */}
             </button>
-            <button className={style.forwardButton} disabled={props.forwardButtonDisabled}> {/* (click)="navigateForward()" */}
-                <ForwardArrowIcon disabled={props.backButtonDisabled} />
+            <button className={style.forwardButton} onClick={navigateForward}> {/* disabled={props.forwardButtonDisabled} */}
+                <ForwardArrowIcon /> {/* disabled={props.backButtonDisabled} */}
             </button>
         </div>
     );
 };
 
-export default HistoryNavigationButtons;
+export default withRouter(HistoryNavigationButtons);

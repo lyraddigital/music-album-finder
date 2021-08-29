@@ -6,7 +6,7 @@ import SearchForm from "../SearchForm/SearchForm";
 const TopBar = () => {
     return (
         <header className={style.header}>
-            <HistoryNavigationButtons backButtonDisabled={true} forwardButtonDisabled={true} />
+            <HistoryNavigationButtons />
             <SearchForm />
         </header>
     );

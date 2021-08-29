@@ -23,7 +23,7 @@ const SearchForm = (props: RouteComponentProps) => {
         if (isSearchResultsPage) {
             history.replace(`${newSearchTerm}`);
         } else {
-            history.push(`${SEARCH_RESULTS_PAGE_URL}${newSearchTerm}`); 
+            history.push(`${SEARCH_RESULTS_PAGE_URL}${newSearchTerm}`);
         }
     };
 
