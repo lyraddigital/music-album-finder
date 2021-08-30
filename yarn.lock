@@ -1760,7 +1760,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/history@*", "@types/history@^4.7.9":
+"@types/history@*":
   "integrity" "sha512-MUc6zSmU3tEVnkQ78q0peeEjKWPUADMlC/t++2bI8WnAG2tvYRPIgHG8lWkXwqc8MsUF6Z2MOf+Mh5sazOmhiQ=="
   "resolved" "https://registry.npmjs.org/@types/history/-/history-4.7.9.tgz"
   "version" "4.7.9"
