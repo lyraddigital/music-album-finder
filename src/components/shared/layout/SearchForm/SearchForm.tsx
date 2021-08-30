@@ -44,9 +44,6 @@ const SearchForm = (props: RouteComponentProps) => {
                     <XIcon />
                 </button>
             </div>
-            <button type="button" className={style.mobileClearButton} onClick={clearSearchTerm}>
-                <XIcon isWhite={true} />
-            </button>
         </form>
     );
 };

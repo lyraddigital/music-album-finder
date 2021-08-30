@@ -9,7 +9,6 @@ import './App.scss';
 
 import SideBar from './components/shared/layout/SideBar/SideBar';
 import TopBar from './components/shared/layout/TopBar/TopBar';
-import Footer from './components/shared/layout/Footer/Footer';
 import SearchStart from './pages/SearchStart/SearchStart';
 import SearchResults from './pages/SearchResults/SearchResults';
 
@@ -25,8 +24,7 @@ function App() {
             <Route path="/">
               <Redirect to="/search/start" />
             </Route>
-          </Switch>
-          <Footer />        
+          </Switch>      
       </main>
     </Router>
   );

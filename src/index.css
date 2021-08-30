@@ -27,18 +27,6 @@ body {
 
 #root {
   flex: 1 0 0;
-  display: flex;
-}
-
-@media (min-width: 768px) and (orientation: portrait), (min-width: 824px) and (orientation: landscape) {
-  #root {
-    display: grid;
-    grid-template-columns: 100px 1fr;
-  }
-}
-
-@media (min-width: 1024px) {
-  #root {
-    grid-template-columns: 230px 1fr;
-  }
+  display: grid;
+  grid-template-columns: 230px 1fr;
 }
