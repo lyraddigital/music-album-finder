@@ -1,34 +1,50 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import style from './HistoryNavigationButtons.module.scss';
-
 import BackArrowIcon from '../../icons/BackArrowIcon/BackArrowIcon';
 import ForwardArrowIcon from '../../icons/ForwardArrowIcon/ForwardArrowIcon';
 
+const historyStepsReducer = (state: any, action: any) => {
+    switch(action.type) {
+        case 'PUSH': {
+            const currentCount = state.count;
+            const newKeys = [...state.stepKeys, action.key];
+
+            return { 
+                ...state,
+                count: (currentCount + 1),
+                stepKeys: newKeys
+            };
+        }
+        case 'POP': {
+            const index = state.stepKeys.findIndex((sk: any) => sk === action.key);
+            
+            return {
+                ...state,
+                currentIndex: index
+            };
+        }
+    }
+
+    return state;
+};
+
 const HistoryNavigationButtons = (props: any) => {
     const { history } = props;
-    const [ historySteps, setHistorySteps ] = useState<number>(0);
-    const [ currentStep, setCurrentStep ] = useState<number>(0);
-    const [ stepKeys, setStepKeys ] = useState<Array<string>>([history.location.key]);
-    
+    const [ historySteps, dispatch ] = useReducer(historyStepsReducer, { count: 1, currentIndex: 0, stepKeys: [history.location.key] });
+
+    console.log(historySteps);
+
     useEffect(() => {
         history.listen((e:any) => {
             if (history.action === 'PUSH') {
-                console.log(e);
-                setHistorySteps((prevSteps: number) => prevSteps + 1);
-                setCurrentStep((prevStep: number) => prevStep + 1);
-                setStepKeys((prevStepKeys: Array<string>) => {
-                    const newStepKeys = [ ...prevStepKeys ];
-                    newStepKeys.push(e.key);
-
-                    return newStepKeys;
-                })
+                dispatch({ type: 'PUSH', key: e.key });
             } else if (history.action === 'POP') {
-                console.log(history.location.key);
+                dispatch({ type: 'POP', key: history.location.key });
             }
         });
-    }, [history, setHistorySteps, setCurrentStep, setStepKeys]);
+    }, [history, dispatch]);
 
     const navigateBack = () => {    
         history.goBack();
@@ -37,9 +53,6 @@ const HistoryNavigationButtons = (props: any) => {
     const navigateForward = () => {
         history.goForward();
     };
-
-    console.log(historySteps);
-    console.log(currentStep);
 
     return (
         <div id={style.historyNavigationButtons}>
