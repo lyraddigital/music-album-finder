@@ -1,37 +1,33 @@
 import style from './SearchResults.module.scss';
-import loadingImage from '../../assets/images/loading.svg';
 
 import useSearch from '../../hooks/useSearch';
-import SearchResult from "../../components/shared/search/SearchResult/SearchResult";
+import Loader from '../../components/shared/Loader/Loader';
+import SearchResult from "../../components/search/SearchResult/SearchResult";
+import NoSearchResults from '../../components/search/NoSearchResults/NoSearchResults';
 
 const SearchResults = (props: any) => {
     const searchTerm = props?.match?.params?.searchTerm;       
     const { searchItems, isLoading } = useSearch(searchTerm);
 
-    // Show loading image when loading on the page. Otherwise we show the results.
     if (isLoading) {
+        return <Loader />;        
+    }
+
+    if (searchItems.length === 0) {
         return (
-            <div className={style.loadingDiv}>
-                <img src={loadingImage} alt="" />
-            </div>
+            <NoSearchResults searchTerm={searchTerm} />
         );
     }
 
-    const resultsEl = searchItems.length === 0 ? (
-        <p>
-            No results found for &quot;{searchTerm}&quot;
-        </p>
-    ): searchItems.map((s, index) => {
-        return(
-            <li key={index}>
-                <SearchResult searchResult={s} />
-            </li>
-        )
-    });   
-
     return (
         <ul className={style.songList}>
-            {resultsEl}
+            {searchItems.map((s, index) => {
+                return (
+                    <li key={index}>
+                        <SearchResult searchResult={s} />
+                    </li>
+                )
+            })}
         </ul>
     );
 }

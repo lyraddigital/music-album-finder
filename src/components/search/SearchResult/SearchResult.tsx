@@ -1,8 +1,8 @@
 import style from './SearchResult.module.scss';
 
-import { SearchResultItem } from '../../../../models';
+import { SearchResultItem } from '../../../models';
 
-export interface SearchResultProps {
+interface SearchResultProps {
     searchResult: SearchResultItem;
 }
 
