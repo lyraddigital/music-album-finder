@@ -1,0 +1,17 @@
+.loadingDiv {
+    flex: 1 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 40px;
+}
+
+.songList {
+    list-style: none;
+    display: grid;
+    padding: 0 32px;
+    grid-gap: 16px;
+    justify-content: center;
+    align-content: start;
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+}

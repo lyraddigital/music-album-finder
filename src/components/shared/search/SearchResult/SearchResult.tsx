@@ -1,13 +1,17 @@
-const SearchResult = (props: any) => {
+import style from './SearchResult.module.scss';
+
+import { SearchResultItem } from '../../../../models';
+
+export interface SearchResultProps {
+    searchResult: SearchResultItem;
+}
+
+const SearchResult = (props: SearchResultProps) => {
     const  { searchResult } = props;
 
     return (
-        <article>
-            <picture>
-                <source srcSet={searchResult?.largeThumbnailSrc}>
-                    {/* <img src={searchResult?.smallThumbnailSrc} alt="" /> */}
-                </source>
-            </picture>
+        <article className={style.searchResult}>
+            <img src={searchResult?.thumbnailSrc} alt="" />
             
             <div>
                 <h3>{ searchResult?.title }</h3>
