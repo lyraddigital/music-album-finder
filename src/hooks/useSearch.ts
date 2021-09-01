@@ -11,8 +11,8 @@ const useSearch = (searchTerm: string): { searchItems: Array<SearchResultItem>, 
         setTimeout(() => {
             setIsLoading(false);
             setSearchItems([{
-                title: 'Rudix World',
-                artist: 'Daryl Duckmanton',
+                title: 'Daryl is the best',
+                artist: 'Daryl Duck',
                 thumbnailSrc: 'https://i.ytimg.com/vi/bNH6DyDPeIc/maxresdefault.jpg'
             }]);
         }, 500);
