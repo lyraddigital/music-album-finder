@@ -1,10 +1,10 @@
-name: Send Workflow Run Result
+name: Send CI Run Result
 
 # Determines after which workflows this workflow will execute.
 on:
   workflow_run:
     workflows: 
-      - CD
+      - CI
     types: 
       - completed
 
