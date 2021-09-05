@@ -12,7 +12,6 @@ export class SiteBucket extends Construct {
         this.instance = new Bucket(this, 'WebsiteBucket', {
             bucketName: `${domainProps.subDomain}.${domainProps.rootDomain}`,
             websiteIndexDocument: 'index.html',
-            publicReadAccess: true,
       
             // Keep for all environments except production
             removalPolicy: RemovalPolicy.DESTROY
