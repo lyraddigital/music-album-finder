@@ -1,6 +1,9 @@
 import { CfnParameter, Construct, Stack, StackProps } from '@aws-cdk/core';
 
 import { SiteBucket } from './constructs/site-bucket';
+import { DNSRecord } from './constructs/dns-record';
+import { SiteDistribution } from './constructs/site-distribution';
+import { SiteDeployment } from './constructs/site-deployment';
 
 export class WebsiteStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -12,7 +15,15 @@ export class WebsiteStack extends Stack {
     });
 
     const domainProps = { rootDomain: 'lyraddigital.com', subDomain: subDomain.valueAsString };
-
-    new SiteBucket(this, 'SiteBucket', domainProps);
+    const siteBucket = new SiteBucket(this, 'SiteBucket', domainProps);
+    const distribution = new SiteDistribution(this, 'SiteDistribution', { ...domainProps, siteBucket: siteBucket.instance });
+    
+    new DNSRecord(this, 'SiteDNSRecord', { ...domainProps, distribution: distribution.instance });
+    
+    new SiteDeployment(this, 'SiteDeployment', {
+      bucket: siteBucket.instance,
+      sourceCodeFolder: '../src',
+      distribution: distribution.instance,
+    });
   }
 }
