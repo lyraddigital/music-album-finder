@@ -18,8 +18,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install Dependencies
+      - name: Install Application Dependencies
         run: npm install
+
+      - name: Install Infrastructure Dependencies
+        run: cd infrastructure && npm install
 
       - name: Building Code
         run: npm run build
