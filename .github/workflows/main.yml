@@ -36,6 +36,7 @@ jobs:
           cdk_subcommand: 'deploy'
           cdk_stack: 'WebsiteStack'
           cdk_args: '--parameters subDomain=dev-spotify-clone'
+          working_dir: 'infrastructure'
           actions_comment: false
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
