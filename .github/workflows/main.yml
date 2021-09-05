@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,11 +23,7 @@ jobs:
 
       - name: Running Unit Tests
         run: npm run test
-  
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
+        
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master
         with:
