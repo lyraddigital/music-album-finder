@@ -11,7 +11,7 @@ const useSearch = (searchTerm: string): { searchItems: Array<SearchResultItem>, 
         setTimeout(() => {
             setIsLoading(false);
             setSearchItems([{
-                title: 'Daryl is the bestest',
+                title: 'Daryl is the best',
                 artist: 'Daryl Duck',
                 thumbnailSrc: 'https://i.ytimg.com/vi/bNH6DyDPeIc/maxresdefault.jpg'
             }]);
