@@ -35,7 +35,7 @@ jobs:
         with:
           cdk_subcommand: 'deploy'
           cdk_stack: 'WebsiteStack'
-          cdk_args: '--parameters subDomain=dev-spotify-clone --require-approval never'
+          cdk_args: '--parameters subDomainName=dev-spotify-clone --require-approval never'
           working_dir: 'infrastructure'
           actions_comment: false
         env:
