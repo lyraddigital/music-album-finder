@@ -21,13 +21,38 @@ jobs:
       - name: Install Application Dependencies
         run: npm install
 
-      - name: Install Infrastructure Dependencies
-        run: cd infrastructure && npm install
-
-      - name: Building Code
+      - name: Building Application Code
         run: npm run build
+
+      - name: Archive Production Code 
+        uses: actions/upload-artifact@v2
+        with:
+          name: production-code
+          path: build
+
+      - name: Archive Production Code 
+        uses: actions/upload-artifact@v2
+        with:
+          name: infrastructure-code
+          path: infrastructure
         
-  testing:
+  # testing:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+    
+  #   environment:
+  #     name: Production
+      
+  #   steps:
+  #     - name: Download a single artifact
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: application-code
+
+  #     - name: Running Unit Tests
+  #       run: npm run test
+
+  deploy:
     runs-on: ubuntu-latest
     needs: build
     
@@ -35,24 +60,25 @@ jobs:
       name: Production
       
     steps:
-      - name: Running Unit Tests
-        run: npm run test
+      - name: Download the application code
+        uses: actions/download-artifact@v2
+        with:
+          name: application-code
+          path: application-code
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: testing
-    
-    environment:
-      name: Production
-      
-    steps:
+      - name: Download the infrastructure code
+        uses: actions/download-artifact@v2
+        with:
+          name: infrastructure-code
+          path: infrastructure-code
+
       - name: Creating / Updating Infrastructure
         uses: youyo/aws-cdk-github-actions@v2
         with:
           cdk_subcommand: 'deploy'
           cdk_stack: 'WebsiteStack'
-          cdk_args: '--parameters subDomainName=dev-spotify-clone --require-approval never'
-          working_dir: 'infrastructure'
+          cdk_args: '--parameters subDomainName=dev-spotify-clone sourceCodeFolder=application-code --require-approval never'
+          working_dir: 'infrastructure-code'
           actions_comment: false
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}

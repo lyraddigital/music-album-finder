@@ -9,7 +9,12 @@ export class WebsiteStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const subDomain =  new CfnParameter(this, 'subDomainName', {
+    const subDomain = new CfnParameter(this, 'subDomainName', {
+      type: 'String',
+      description: 'The name of the sub domain that will be set as an alias record in Route53 and be used by Cloudfront'
+    });
+
+    const sourceCodeFolder = new CfnParameter(this, 'sourceCodeFolder', {
       type: 'String',
       description: 'The name of the sub domain that will be set as an alias record in Route53 and be used by Cloudfront'
     });
@@ -22,7 +27,7 @@ export class WebsiteStack extends Stack {
     
     new SiteDeployment(this, 'SiteDeployment', {
       bucket: siteBucket.instance,
-      sourceCodeFolder: '../src',
+      sourceCodeFolder: sourceCodeFolder.valueAsString,
       distribution: distribution.instance,
     });
   }
