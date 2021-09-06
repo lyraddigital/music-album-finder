@@ -63,8 +63,8 @@ jobs:
       - name: Download the application code
         uses: actions/download-artifact@v2
         with:
-          name: application-code
-          path: application-code
+          name: production-code
+          path: production-code
 
       - name: Download the infrastructure code
         uses: actions/download-artifact@v2
@@ -77,7 +77,7 @@ jobs:
         with:
           cdk_subcommand: 'deploy'
           cdk_stack: 'WebsiteStack'
-          cdk_args: '--parameters subDomainName=dev-spotify-clone sourceCodeFolder=application-code --require-approval never'
+          cdk_args: '--parameters subDomainName=dev-spotify-clone sourceCodeFolder=production-code --require-approval never'
           working_dir: 'infrastructure-code'
           actions_comment: false
         env:
