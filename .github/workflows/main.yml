@@ -24,33 +24,20 @@ jobs:
       - name: Building Application Code
         run: npm run build
 
-      - name: Archive Production Code 
+      - name: Running Unit Tests
+        run: npm run test
+
+      - name: Archive Application Code 
         uses: actions/upload-artifact@v2
         with:
-          name: production-code
+          name: application-code
           path: build
 
-      - name: Archive Production Code 
+      - name: Archive Infrastructure Code 
         uses: actions/upload-artifact@v2
         with:
           name: infrastructure-code
           path: infrastructure
-        
-  # testing:
-  #   runs-on: ubuntu-latest
-  #   needs: build
-    
-  #   environment:
-  #     name: Production
-      
-  #   steps:
-  #     - name: Download a single artifact
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: application-code
-
-  #     - name: Running Unit Tests
-  #       run: npm run test
 
   deploy:
     runs-on: ubuntu-latest
@@ -63,8 +50,8 @@ jobs:
       - name: Download the application code
         uses: actions/download-artifact@v2
         with:
-          name: production-code
-          path: production-code
+          name: application-code
+          path: application-code
 
       - name: Download the infrastructure code
         uses: actions/download-artifact@v2
@@ -72,12 +59,15 @@ jobs:
           name: infrastructure-code
           path: infrastructure-code
 
+      - name: Install Infrastructure Dependencies
+        run: cd infrastructure-code && npm install
+
       - name: Creating / Updating Infrastructure
         uses: youyo/aws-cdk-github-actions@v2
         with:
           cdk_subcommand: 'deploy'
           cdk_stack: 'WebsiteStack'
-          cdk_args: '--parameters subDomainName=dev-spotify-clone sourceCodeFolder=production-code --require-approval never'
+          cdk_args: '--parameters subDomainName=dev-spotify-clone sourceCodeFolder=application-code --require-approval never'
           working_dir: 'infrastructure-code'
           actions_comment: false
         env:
