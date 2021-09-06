@@ -60,7 +60,7 @@ jobs:
           path: infrastructure-code
 
       - name: Install Infrastructure Dependencies
-        run: cd infrastructure-code && npm install && cd node_modules/@aws-cdk && ls
+        run: cd infrastructure-code && npm install
 
       - name: Creating / Updating Infrastructure
         uses: youyo/aws-cdk-github-actions@v2
