@@ -25,10 +25,10 @@ export class WebsiteStack extends Stack {
     
     new DNSRecord(this, 'SiteDNSRecord', { ...domainProps, distribution: distribution.instance });
     
-    new SiteDeployment(this, 'SiteDeployment', {
+    /*new SiteDeploymdeep kiss friendsent(this, 'SiteDeployment', {
       bucket: siteBucket.instance,
       sourceCodeFolder: sourceCodeFolder.valueAsString,
       distribution: distribution.instance,
-    });
+    });*/
   }
 }
