@@ -1,21 +1,16 @@
+import { useRecoilValue } from 'recoil';
 import style from './SearchResults.module.scss';
 
-import useSearch from '../../hooks/useSearch';
-import Loader from '../../components/shared/Loader/Loader';
+import { searchItemsBySearchTerm } from '../../store/searchItemsState';
 import SearchResult from "../../components/search/SearchResult/SearchResult";
 import NoSearchResults from '../../components/search/NoSearchResults/NoSearchResults';
 
-const SearchResults = (props: any) => {
-    const searchTerm = props?.match?.params?.searchTerm;       
-    const { searchItems, isLoading } = useSearch(searchTerm);
-
-    if (isLoading) {
-        return <Loader />;        
-    }
+const SearchResults = () => {
+    const { searchItems } = useRecoilValue(searchItemsBySearchTerm);
 
     if (searchItems.length === 0) {
         return (
-            <NoSearchResults searchTerm={searchTerm} />
+            <NoSearchResults searchTerm={''} />
         );
     }
 
@@ -28,7 +23,7 @@ const SearchResults = (props: any) => {
                     </li>
                 )
             })}
-        </ul>
+        </ul>        
     );
 }
 

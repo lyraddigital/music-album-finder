@@ -1,5 +1,7 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { searchTermState } from '../../../../store/searchItemsState';
 
 import MagnifyingIcon from '../../icons/MagnifyingIcon/MagnifyingIcon';
 import XIcon from '../../icons/XIcon/XIcon';
@@ -11,8 +13,7 @@ const SEARCH_START_PAGE_URL = '/search/start/';
 const SearchForm = (props: RouteComponentProps) => {
     const { history, location } = props;
     const isSearchResultsPage = location?.pathname?.startsWith(SEARCH_RESULTS_PAGE_URL);
-    const searchUrl =  isSearchResultsPage ? location?.pathname.replace(SEARCH_RESULTS_PAGE_URL, ''): '';
-    const [searchTerm, setSearchTerm] = useState<string>(searchUrl);
+    const [searchTerm, setSearchTerm] = useRecoilState<string>(searchTermState);
     const clearButtonClass = `${style.tabletClearButton} ${searchTerm.length > 0 ? style.active: undefined}`;
 
     const performSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +30,6 @@ const SearchForm = (props: RouteComponentProps) => {
 
     const clearSearchTerm = () => {
         setSearchTerm('');
-
         history.push(SEARCH_START_PAGE_URL, { key: history.location.key });
     };
 
