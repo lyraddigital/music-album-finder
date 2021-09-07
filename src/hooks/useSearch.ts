@@ -1,27 +1,27 @@
-import { useEffect, useState } from "react";
-import { SearchResultItem } from "../models";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
 
-const useSearch = (searchTerm: string): { searchItems: Array<SearchResultItem>, isLoading: boolean } => {
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [searchItems, setSearchItems] = useState<Array<SearchResultItem>>([]);
+import { SearchItemsState, searchItemsState } from "../store/searchItemsState";
+
+const useSearch = (searchTerm: string): SearchItemsState => {
+    const [searchItemState, setSearchItemState] = useRecoilState<SearchItemsState>(searchItemsState);
 
     useEffect(() => {
-        setIsLoading(true);
+        setSearchItemState({ searchItems: [], isLoading: true })
 
         setTimeout(() => {
-            setIsLoading(false);
-            setSearchItems([{
-                title: 'Daryl is the best',
-                artist: 'Daryl Duck',
-                thumbnailSrc: 'https://i.ytimg.com/vi/bNH6DyDPeIc/maxresdefault.jpg'
-            }]);
+            setSearchItemState({ 
+                searchItems: [{
+                    title: 'Daryl is the best',
+                    artist: 'Daryl Duck',
+                    thumbnailSrc: 'https://i.ytimg.com/vi/bNH6DyDPeIc/maxresdefault.jpg'
+                }],
+                isLoading: false 
+            });
         }, 500);
-    }, [searchTerm]);
+    }, [searchTerm, setSearchItemState]);
 
-    return ({
-        isLoading,
-        searchItems 
-    });
+    return searchItemState;
 };
 
 export default useSearch;
