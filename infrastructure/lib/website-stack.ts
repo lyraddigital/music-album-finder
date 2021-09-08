@@ -20,9 +20,8 @@ export class WebsiteStack extends Stack {
     // });
 
     const domainProps = { rootDomain: 'lyraddigital.com', subDomain: subDomain.valueAsString };
-    //const siteBucket = 
-    new SiteBucket(this, 'SiteBucket', domainProps);
-    // const distribution = new SiteDistribution(this, 'SiteDistribution', { ...domainProps, siteBucket: siteBucket.instance });
+    const siteBucket = new SiteBucket(this, 'SiteBucket', domainProps);
+    const distribution = new SiteDistribution(this, 'SiteDistribution', { ...domainProps, siteBucket: siteBucket.instance });
     
     // new DNSRecord(this, 'SiteDNSRecord', { ...domainProps, distribution: distribution.instance });
     
