@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,9 +7,8 @@ import {
 
 import SideBar from './components/shared/layout/SideBar/SideBar';
 import TopBar from './components/shared/layout/TopBar/TopBar';
-import Loader from './components/shared/Loader/Loader';
 import SearchStart from './pages/SearchStart/SearchStart';
-import SearchResults from './pages/SearchResults/SearchResults';
+import SearchResultsPage from './pages/SearchResults/SearchResultsPage';
 
 import './App.scss';
 
@@ -22,9 +20,7 @@ function App() {
           <TopBar />
           <Switch>
             <Route path="/search/results/:searchTerm">
-              <Suspense fallback={<Loader />}>
-                <SearchResults />
-              </Suspense>
+              <SearchResultsPage />
             </Route>
             <Route path="/search/start" component={SearchStart} />
             <Route path="/">

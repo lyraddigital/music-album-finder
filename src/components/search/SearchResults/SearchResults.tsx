@@ -1,9 +1,9 @@
 import { useRecoilValue } from 'recoil';
 import style from './SearchResults.module.scss';
 
-import { searchItemsBySearchTerm } from '../../store/searchItemsState';
-import SearchResult from "../../components/search/SearchResult/SearchResult";
-import NoSearchResults from '../../components/search/NoSearchResults/NoSearchResults';
+import { searchItemsBySearchTerm } from '../../../store/searchItemsState';
+import SearchResult from "../SearchResult/SearchResult";
+import NoSearchResults from '../NoSearchResults/NoSearchResults';
 
 const SearchResults = () => {
     const { searchItems } = useRecoilValue(searchItemsBySearchTerm);
