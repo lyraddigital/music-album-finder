@@ -23,7 +23,7 @@ export class WebsiteStack extends Stack {
     const siteBucket = new SiteBucket(this, 'SiteBucket', domainProps);
     const distribution = new SiteDistribution(this, 'SiteDistribution', { ...domainProps, siteBucket: siteBucket.instance });
     
-    // new DNSRecord(this, 'SiteDNSRecord', { ...domainProps, distribution: distribution.instance });
+    new DNSRecord(this, 'SiteDNSRecord', { ...domainProps, distribution: distribution.instance });
     
     /*new SiteDeployment(this, 'SiteDeployment', {
       bucket: siteBucket.instance,
