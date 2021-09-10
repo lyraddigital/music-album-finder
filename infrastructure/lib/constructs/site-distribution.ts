@@ -22,7 +22,8 @@ export class SiteDistribution extends Construct {
             domainName: props.rootDomain,
             validation: CertificateValidation.fromDns(),
             subjectAlternativeNames: [`${props.subDomain}.${props.rootDomain}`],
-            hostedZone: zone
+            hostedZone: zone,
+            region: 'us-east-1'
         });
 
         this.instance = new CloudFrontWebDistribution(this, 'WebsiteDistribution', {
