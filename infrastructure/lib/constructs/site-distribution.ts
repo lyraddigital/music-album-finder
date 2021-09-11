@@ -20,9 +20,9 @@ export class SiteDistribution extends Construct {
         const domainName = props.subDomain ? `${props.subDomain}.${props.rootDomain}`: props.rootDomain;
 
         const certificate = new DnsValidatedCertificate(this, 'WebsiteCertificate', {
-            domainName: props.rootDomain,
+            domainName: domainName,
             validation: CertificateValidation.fromDns(),
-            subjectAlternativeNames: [domainName],
+            // subjectAlternativeNames: [domainName],
             hostedZone: zone,
             region: 'us-east-1'
         });
