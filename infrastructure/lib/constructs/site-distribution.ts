@@ -17,11 +17,12 @@ export class SiteDistribution extends Construct {
         super(parent, id);
         
         const zone = HostedZone.fromLookup(this, 'Zone', { domainName: props.rootDomain });
+        const domainName = props.subDomain ? `${props.subDomain}.${props.rootDomain}`: props.rootDomain;
 
         const certificate = new DnsValidatedCertificate(this, 'WebsiteCertificate', {
             domainName: props.rootDomain,
             validation: CertificateValidation.fromDns(),
-            subjectAlternativeNames: [`${props.subDomain}.${props.rootDomain}`],
+            subjectAlternativeNames: [domainName],
             hostedZone: zone,
             region: 'us-east-1'
         });
