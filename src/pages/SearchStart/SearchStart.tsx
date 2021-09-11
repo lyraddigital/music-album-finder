@@ -11,4 +11,4 @@ const SearchStart = () => {
     );
 }
 
-export default SearchStar;
+export default SearchStart;
