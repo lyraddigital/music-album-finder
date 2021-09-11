@@ -30,7 +30,7 @@ export class SiteDistribution extends Construct {
         this.instance = new CloudFrontWebDistribution(this, 'WebsiteDistribution', {
             aliasConfiguration: {
                 acmCertRef: certificate.certificateArn,
-                names: [ props.rootDomain ],
+                names: [ domainName ],
                 sslMethod: SSLMethod.SNI,
                 securityPolicy: SecurityPolicyProtocol.TLS_V1_1_2016,
             },
