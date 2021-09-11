@@ -14,11 +14,6 @@ jobs:
   send-webhook-notification:
     runs-on: ubuntu-latest
 
-    # (OPTIONAL) Include the environment below if you are
-    # setting up your secrets against an environment
-    environment:
-      name: Production
-
     # Using a custom action built by github user (distributhor).
     # See https://github.com/marketplace/actions/workflow-webhook-action 
     # for more details
