@@ -12,9 +12,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    environment:
-      name: Production
-
     steps:
       - uses: actions/checkout@v2
 
@@ -66,7 +63,7 @@ jobs:
         uses: youyo/aws-cdk-github-actions@v2
         with:
           cdk_subcommand: 'deploy'
-          cdk_stack: 'SpotifyCloneWebsiteStack'
+          cdk_stack: ${{ secrets.SITE_STACK_NAME }}
           cdk_args: '--parameters subDomainName=${{ secrets.SITE_SUB_DOMAIN }} --require-approval never'
           working_dir: 'infrastructure-code'
           actions_comment: false
