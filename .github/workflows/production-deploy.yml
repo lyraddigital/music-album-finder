@@ -7,8 +7,7 @@ on:
   workflow_run:
     workflows: [CI]
     branches: [main]
-    types: 
-      - success
+    types: [completed]
   
   workflow_dispatch:
 
@@ -22,15 +21,19 @@ jobs:
       name: Production
       
     steps:
-      - name: Download the application code
-        uses: actions/download-artifact@v2
+      - name: Download application code
+        uses: dawidd6/action-download-artifact@v2
         with:
+          workflow: ci.yml
+          workflow_conclusion: success     
           name: application-code
           path: application-code
-
-      - name: Download the infrastructure code
-        uses: actions/download-artifact@v2
+                
+      - name: Download infrastructure code
+        uses: dawidd6/action-download-artifact@v2
         with:
+          workflow: ci.yml
+          workflow_conclusion: success     
           name: infrastructure-code
           path: infrastructure-code
 
