@@ -7,8 +7,7 @@ on:
   workflow_run:
     workflows: [CI]
     branches: [main]
-    types: 
-      - success
+    types: [completed]
   
   workflow_dispatch:
 
