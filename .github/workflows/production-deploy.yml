@@ -5,10 +5,8 @@ name: Production Deploy
 # Controls when the workflow will run
 on:
   workflow_run:
-    workflows: 
-      - CI
-    # branches:
-    #   - main
+    workflows: [CI]
+    branches: [main]
     types: 
       - success
   
