@@ -21,22 +21,19 @@ jobs:
       name: Production
       
     steps:
-      - name: Download artifact
+      - name: Download application code
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: ci.yml
-          workflow_conclusion: success
-          branch: main
-          # Optional, will use specified workflow run
-          # run_id: 1122334455
-          # Optional, run number from the workflow
-          # run_number:           
+          workflow_conclusion: success     
           name: application-code
           path: application-code
-
-      - name: Download the infrastructure code
-        uses: actions/download-artifact@v2
+                
+      - name: Download infrastructure code
+        uses: dawidd6/action-download-artifact@v2
         with:
+          workflow: ci.yml
+          workflow_conclusion: success     
           name: infrastructure-code
           path: infrastructure-code
 
