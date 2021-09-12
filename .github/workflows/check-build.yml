@@ -1,6 +1,5 @@
 name: Send CI Run Result
 
-# Determines after which workflows this workflow will execute.
 on:
   workflow_run:
     workflows: 
@@ -9,14 +8,9 @@ on:
       - completed
 
 jobs:
-  # This job will perform a HTTP POST to any endpoint
-  # you set up your web hook
   send-webhook-notification:
     runs-on: ubuntu-latest
 
-    # Using a custom action built by github user (distributhor).
-    # See https://github.com/marketplace/actions/workflow-webhook-action 
-    # for more details
     steps:
       - name: Send Action Run Result to Webhook        
         uses: distributhor/workflow-webhook@v2
