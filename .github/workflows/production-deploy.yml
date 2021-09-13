@@ -1,8 +1,5 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Production Deploy
 
-# Controls when the workflow will run
 on:
   workflow_run:
     workflows: [CI]
@@ -11,9 +8,7 @@ on:
   
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   deploy:
     runs-on: ubuntu-latest
     
@@ -24,16 +19,14 @@ jobs:
       - name: Download application code
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: ci.yml
-          workflow_conclusion: success     
+          workflow: ci.yml    
           name: application-code
           path: application-code
                 
       - name: Download infrastructure code
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: ci.yml
-          workflow_conclusion: success     
+          workflow: ci.yml  
           name: infrastructure-code
           path: infrastructure-code
 
