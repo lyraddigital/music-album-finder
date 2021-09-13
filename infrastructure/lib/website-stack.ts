@@ -14,17 +14,17 @@ export class WebsiteStack extends Stack {
       description: 'The name of the sub domain that will be set as an alias record in Route53 and be used by Cloudfront'
     });
 
-    // const zoneName = new CfnParameter(this, 'zoneName', {
-    //   type: 'String',
-    //   description: 'The name of the zone in Route53'
-    // });
+    const zoneName = new CfnParameter(this, 'zoneName', {
+      type: 'String',
+      description: 'The name of the zone in Route53'
+    });
 
     // const sourceCodeFolder = new CfnParameter(this, 'sourceCodeFolder', {
     //   type: 'String',
     //   description: 'The name of the sub domain that will be set as an alias record in Route53 and be used by Cloudfront'
     // });
 
-    const domainProps = { rootDomain: 'lyraddigital.com', subDomain: subDomain.valueAsString };
+    const domainProps = { rootDomain: zoneName.valueAsString, subDomain: subDomain.valueAsString };
     const siteBucket = new SiteBucket(this, 'SiteBucket', domainProps);
     const distribution = new SiteDistribution(this, 'SiteDistribution', { ...domainProps, siteBucket: siteBucket.instance });
     
