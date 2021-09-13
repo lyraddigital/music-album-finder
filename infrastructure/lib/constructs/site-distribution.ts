@@ -16,7 +16,7 @@ export class SiteDistribution extends Construct {
     constructor(parent: Construct, id: string, props: SiteDistributionProps) {
         super(parent, id);
 
-        console.log(props.rootDomain);
+        console.log('Root Domain Input: ', props.rootDomain);
         
         const zone = HostedZone.fromLookup(this, 'Zone', { domainName: props.rootDomain });
         const domainName = props.subDomain ? `${props.subDomain}.${props.rootDomain}`: props.rootDomain;
