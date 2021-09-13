@@ -19,10 +19,10 @@ export class WebsiteStack extends Stack {
     //   description: 'The name of the zone in Route53'
     // });
 
-    // const sourceCodeFolder = new CfnParameter(this, 'sourceCodeFolder', {
-    //   type: 'String',
-    //   description: 'The name of the sub domain that will be set as an alias record in Route53 and be used by Cloudfront'
-    // });
+    const sourceCodeFolder = new CfnParameter(this, 'sourceCodeFolder', {
+      type: 'String',
+      description: 'The name of the sub domain that will be set as an alias record in Route53 and be used by Cloudfront'
+    });
 
     const domainProps = { rootDomain: 'lyraddigital.com', subDomain: subDomain.valueAsString };
     const siteBucket = new SiteBucket(this, 'SiteBucket', domainProps);
@@ -30,10 +30,10 @@ export class WebsiteStack extends Stack {
     
     new DNSRecord(this, 'SiteDNSRecord', { ...domainProps, distribution: distribution.instance });
     
-    /*new SiteDeployment(this, 'SiteDeployment', {
+    new SiteDeployment(this, 'SiteDeployment', {
       bucket: siteBucket.instance,
       sourceCodeFolder: sourceCodeFolder.valueAsString,
       distribution: distribution.instance,
-    });*/
+    });
   }
 }
