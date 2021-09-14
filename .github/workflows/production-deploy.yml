@@ -9,6 +9,7 @@ on:
 jobs:
   staging-deploy:
     runs-on: ubuntu-latest
+    concurrency: staging-deploy
     
     environment:
       name: Staging
@@ -46,6 +47,7 @@ jobs:
 
   production-deploy:
     runs-on: ubuntu-latest
+    concurrency: production-deploy
     
     environment:
       name: Production
