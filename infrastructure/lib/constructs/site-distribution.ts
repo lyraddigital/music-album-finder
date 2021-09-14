@@ -41,7 +41,7 @@ export class SiteDistribution extends Construct {
                 {
                     errorCode: 403,
                     responseCode: 200,
-                    responsePagePath: 'index.html'
+                    responsePagePath: '/index.html'
                 }
             ],
             originConfigs: [
