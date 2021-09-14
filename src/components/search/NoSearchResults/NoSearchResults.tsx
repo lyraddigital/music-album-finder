@@ -9,7 +9,7 @@ const NoSearchResults = (props: NoSearchResultsProps) => {
         <div className={style.noResults}>
             <h2>No Results</h2>
             <p>
-                No results found for &quot;{props.searchTerm}&quot;
+                No results found for &quot;egg&quot;
             </p>
         </div>
     );
