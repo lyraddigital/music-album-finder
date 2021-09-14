@@ -39,7 +39,7 @@ export class SiteDistribution extends Construct {
             },
             errorConfigurations: [
                 {
-                    errorCode: 403,
+                    errorCode: 404,
                     responseCode: 200,
                     responsePagePath: '/index.html'
                 }
