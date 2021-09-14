@@ -5,11 +5,46 @@ on:
     workflows: [CI]
     branches: [main]
     types: [completed]
-  
-  workflow_dispatch:
 
 jobs:
-  deploy:
+  staging-deploy:
+    runs-on: ubuntu-latest
+    
+    environment:
+      name: Staging
+      
+    steps:
+      - name: Download application code
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: ci.yml    
+          name: application-code
+          path: application-code
+                
+      - name: Download infrastructure code
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: ci.yml
+          name: infrastructure-code
+          path: infrastructure-code
+
+      - name: Install Infrastructure Dependencies
+        run: cd infrastructure-code && npm install
+
+      - name: Creating / Updating Infrastructure
+        uses: youyo/aws-cdk-github-actions@v2
+        with:
+          cdk_subcommand: 'deploy'
+          cdk_stack: ${{ secrets.SITE_STACK_NAME }}
+          cdk_args: '--parameters subDomainName=${{ secrets.SITE_SUB_DOMAIN }} --require-approval never'
+          working_dir: 'infrastructure-code'
+          actions_comment: false
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.CDK_DEFAULT_REGION }}
+
+  production-deploy:
     runs-on: ubuntu-latest
     
     environment:
