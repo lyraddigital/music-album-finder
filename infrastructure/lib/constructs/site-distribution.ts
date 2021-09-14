@@ -37,6 +37,13 @@ export class SiteDistribution extends Construct {
                 sslMethod: SSLMethod.SNI,
                 securityPolicy: SecurityPolicyProtocol.TLS_V1_1_2016,
             },
+            errorConfigurations: [
+                {
+                    errorCode: 403,
+                    responseCode: 200,
+                    responsePagePath: 'index.html'
+                }
+            ],
             originConfigs: [
                 {
                     s3OriginSource: {
