@@ -1,5 +1,5 @@
 import { Construct, RemovalPolicy } from '@aws-cdk/core';
-import { Bucket, IBucket } from '@aws-cdk/aws-s3';
+import { BlockPublicAccess, Bucket, IBucket } from '@aws-cdk/aws-s3';
 
 import { DomainProps } from '../props/domain-props';
 
@@ -10,11 +10,9 @@ export class SiteBucket extends Construct {
         super(parent, id);
 
         this.instance = new Bucket(this, 'WebsiteBucket', {
-            bucketName: `${domainProps.subDomain}.${domainProps.rootDomain}`,
-            websiteIndexDocument: 'index.html',
-      
-            // Keep for all environments except production
-            removalPolicy: RemovalPolicy.DESTROY
+            bucketName: `${domainProps.subDomain}.${domainProps.rootDomain}`,     
+            removalPolicy: RemovalPolicy.DESTROY,
+            blockPublicAccess: BlockPublicAccess.BLOCK_ALL
         });
     }
 }
