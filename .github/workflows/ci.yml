@@ -1,5 +1,5 @@
 name: CI
-concurrency: CI
+concurrency: CI-${{ github.head_ref }}
 
 on: [push]
 
